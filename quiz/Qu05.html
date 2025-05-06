@@ -6,12 +6,25 @@
     <title>Qu05.html</title>
 </head>
 <body>
-    <h2>휴일</h2>
+    <h2>월화수목금토일</h2> <hr>
     <script>
         let fx = function(){
             let day = prompt("월화수목금토일 중에서 입력하세요","");
-            let inputDay
+            if(day == "토" || day == "일"){
+                console.log(day+"는 휴일");
+                document.write("휴일")
+            }
+            else if(day == "월" || day == "목" || day == "금"){
+                console.log(day+"은 출근");
+                document.write(day+"은 출근")
+            }
+            else if(day == "화" || day == "수"){
+                console.log(day+"는 출근");
+                document.write(day+"는 출근")
+            }
         }
+
+        fx();
     </script>
 </body>
 </html>
