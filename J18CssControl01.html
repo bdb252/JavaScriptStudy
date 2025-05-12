@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J18CssControl01.html</title>
+    <script>
+        // 전역변수
+        var pTag, pSize;
+
+        //이 문서의 로드가 완료된 후 익명함수를 실행한다.
+        window.onload = function(){
+            // 기사가 있는 p태그의 DOM요소를 얻어옴
+            pTag = document.getElementById("article");
+            // p태그에 적용된 폰트 크기를 읽어온 후 숫자로 변환한다.
+            pSize = parseInt(pTag.style.fontSize);
+        }
+
+        /*
+        JS에서 스타일을 적용하는 방법
+            HTML에서 스타일을 적용할 DOM요소를 얻어온다.
+            DOM 변수에 style을 추가하고, 뒷부분에 CSS속성을 추가한다.
+            color와 같은 경우는 그대로 사용하면 되고
+            background-color와 같은 경우는 하이픈(-)을 제거한 후 첫 문자를 대문자로 변경한다.
+            Ex) DOM변수.style.color = 'red';
+                DOM변수.style.backgroundColor = 'blue';
+        */ 
+        function fnArticle(flag){
+            switch(flag){
+            /*
+            폰트의 크기, 마진, 패딩과 같이 숫자로 속성값을 지정해야 하는 경우에는
+            pt, px, em과 같은 단위를 반드시 추가해야 한다.
+            */ 
+            case "+":
+                pSize += 10;
+                pTag.style.fontSize = pSize+"px";
+                break;
+            case "-":
+                pSize -= 10;
+                pTag.style.fontSize = pSize+"px";
+                break;
+            case "R":
+                pTag.style.color = "red";
+                break;
+            case "G":
+                pTag.style.color = "green";
+                break;
+            case "B":
+                pTag.style.color = "blue";
+                break;
+            case "Bo":
+                pTag.style.fontWeight = "bold";
+                break;
+            case "No":
+                pTag.style.fontWeight = "normal";
+                break;
+            case "Ce":
+                pTag.style.textAlign = "center";
+                break;
+            case "Le":
+                pTag.style.textAlign = "left";
+                break;
+            case "B_red":
+                pTag.style.backgroundColor = "red";
+                break;
+            case "B_silver":
+                pTag.style.backgroundColor = "silver";
+                break;
+            case "B_white":
+                pTag.style.backgroundColor = "white";
+                break;
+            default :
+                pTag.style.color = "black";
+            }
+        }
+
+        /*
+        퀴즈] 글꼴바꾸기 버튼을 계속 누를때마다 아래 5가지
+        폰트가 토글되어 적용될수 있도록 함수를 정의하시오.
+        글꼴 : [Verdana, 굴림체, 휴먼옛체, 궁서, Impact]
+        */
+        // 토글을 위한 전역변수 생성
+        var cnt = 0;
+        function setFont(){
+            const fonts = ["Verdana", "굴림체", "휴먼옛체", "궁서", "Impact"];
+            if(cnt > 4){
+                cnt = 0;
+            }
+            console.log('fontToggle', cnt);
+            // p태그 부분에 스타일을 적용한다.
+            pTag.style.fontFamily = fonts[cnt++];
+        }
+    </script>
+</head>
+<body>
+    <h2>자바스크립트로 CSS제어하기</h2>
+    <input type="button" value="글꼴바꾸기" onclick="setFont();">
+    <fieldset>
+        <legend>신문기사</legend>
+        <button onclick="fnArticle('+');">+</button>
+        <button onclick="fnArticle('-');">-</button>
+        <button onclick="fnArticle('R');">Red</button>
+        <button onclick="fnArticle('G');">Green</button>
+        <button onclick="fnArticle('B');">Blue</button>
+        <button onclick="fnArticle('');">Black</button>
+        <button onclick="fnArticle('Bo');">볼드체</button>
+        <button onclick="fnArticle('No');">보통체</button>
+        <br>
+        <button onclick="fnArticle('Ce');">가운데정렬</button>
+        <button onclick="fnArticle('Le');">좌측정렬</button>
+        <button onclick="fnArticle('B_red');">배경색(red)</button>
+        <button onclick="fnArticle('B_silver');">배경색(silver)</button>
+        <button onclick="fnArticle('B_white');">배경색(white)</button>
+    </fieldset>
+    <p style="font-size: 12px;" id="article">
+        (서울=연합뉴스) 박경준 기자 = 더불어민주당 이재명 대표는 8일 "기초연금 부부 감액을 단계적으로 
+        줄여 어르신 부부가 좀 더 여유롭게 지내시도록 돕겠다"고 말했다. 이 대표는 어버이날인 이날 
+        페이스북을 통해 이 같은 내용을 골자로 한 '어르신 정책'을 발표했다. 현재는 부부가 모두 65세 
+        이상으로 기초연금을 수급하는 경우 단독 가구와 부부 가구 간 생활비 차이를 고려해 남편과 부인 
+        각각의 기초연금액 중 20%가 줄어든다. 이 후보는 당 대표 시절 기초연금 부부 감액 제도를 폐지해야 
+        한다고 공언한 바 있다. 이 후보는 "일하는 어르신 국민연금 감액도 개선하겠다"며 "100세 시대에 
+        어르신이 일하실 수 있게 권장하는 게 맞다"고 지적했다. 이어 "어르신 돌봄 국가책임제를 시행하겠다"며
+        "지역사회가 함께 돌보는 통합돌봄을 확대해 어르신이 동네에서 편하게 돌봄을 받게 하겠다"고 밝혔다.
+        이 후보는 "간병비 부담을 개인이 아닌 사회가 함께 나누겠다"며 "공공이 부담을 나눠 간병 파산의 걱정을
+        덜어드리겠다"고 강조했다. 이 후보는 "임플란트 건강보험 적용 연령은 낮추고 개수는 늘려가겠다"며 
+        "안전 통학 지킴이, 안심귀가 도우미 같은 공공일자리를 늘리고 어르신 체육시설도 더 많이 만들겠다"고 
+        했다. 또한 지난해 국회에서 통과된 '경로당 주5일 급식 지원 법안'과 관련, "경로당은 물론 노인 여가 
+        복지시설에 대한 지원을 확대하겠다"고 말했다. 이 후보는 이 외에도 맞춤형 주택연금 확대를 통한 노후 
+        소득 안정, 재산 관리가 어려운 어르신을 위한 공공신탁제도 도입, 어르신 등 의료 취약계층을 위한 
+        주치의제도 확대도 약속했다.
+    </p>
+</body>
+</html>
